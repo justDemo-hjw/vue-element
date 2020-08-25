@@ -1,18 +1,21 @@
 <!--
  * @Date: 2020-08-23 22:42:27
  * @LastEditors: hanjiawang
- * @LastEditTime: 2020-08-24 23:59:45
+ * @LastEditTime: 2020-08-25 22:19:16
 -->
 <template>
   <div id="app">
-    11
+    <VHeader />
   </div>
 </template>
 
 <script>
+import VHeader from 'components/v-header/v-header'
 export default {
   name: 'App',
-  components: {}
+  components: {
+    VHeader
+  }
 }
 </script>
 
