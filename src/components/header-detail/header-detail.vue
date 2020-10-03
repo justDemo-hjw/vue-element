@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-show="true" class="header-detail">
+    <div v-show="visible" class="header-detail">
       <div class="detail-wrapper clear-fix">
         <div class="detail-main">
           <h1 class="name">
@@ -36,9 +36,9 @@
           </div>
         </div>
       </div>
-      <!-- <div class="detail-close" @click="hide">
+      <div class="detail-close" @click="hide">
         <i class="icon-close" />
-      </div> -->
+      </div>
     </div>
   </transition>
 </template>
@@ -61,6 +61,19 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  data() {
+    return {
+      visible: false
+    }
+  },
+  methods: {
+    show() {
+      this.visible = true
+    },
+    hide() {
+      this.visible = false
     }
   }
 }

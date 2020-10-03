@@ -1,24 +1,21 @@
 <!--
  * @Date: 2020-08-23 22:42:27
  * @LastEditors: hanjiawang
- * @LastEditTime: 2020-08-30 18:06:02
+ * @LastEditTime: 2020-10-03 11:20:00
 -->
 <template>
   <div id="app">
     <VHeader :seller="seller" />
-    <HeaderDetail :seller="seller" />
   </div>
 </template>
 
 <script>
 import VHeader from 'components/v-header/v-header'
-import HeaderDetail from 'components/header-detail/header-detail'
 import { getSeller } from 'api'
 export default {
   name: 'App',
   components: {
-    VHeader,
-    HeaderDetail
+    VHeader
   },
   data() {
     return {
