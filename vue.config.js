@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-08-23 22:52:25
  * @LastEditors: hanjiawang
- * @LastEditTime: 2020-08-26 23:29:42
+ * @LastEditTime: 2020-10-15 20:47:27
  */
 /*
  * @Date: 2020-08-23 22:52:25
@@ -19,6 +19,8 @@ function resolve(dir) {
 
 module.exports = {
   css: {
+    modules: false,
+    sourceMap: false,
     loaderOptions: {
       stylus: {
         'resolve url': true,

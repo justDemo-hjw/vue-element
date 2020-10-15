@@ -1,7 +1,7 @@
 /*
  * @Date: 2020-07-06 16:25:02
  * @LastEditors: hanjiawang
- * @LastEditTime: 2020-08-13 15:01:04
+ * @LastEditTime: 2020-10-15 20:22:00
  */
 module.exports = {
   semi: false,
@@ -9,5 +9,5 @@ module.exports = {
   // jsx标签闭合位置是否不换行
   bracketSpacing: true,
   // 代码最大宽度，超出换行
-  printWidth: 180
+  printWidth: 150
 }
