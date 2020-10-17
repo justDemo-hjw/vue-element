@@ -1,12 +1,12 @@
 <!--
  * @Date: 2020-08-23 22:42:27
  * @LastEditors: hanjiawang
- * @LastEditTime: 2020-10-17 10:47:31
+ * @LastEditTime: 2020-10-17 10:54:04
 -->
 <template>
   <div id="app">
     <VHeader :seller="seller" />
-    <div class="tab-wrapper">
+    <div class="tab-wrappers ">
       <Tab />
     </div>
   </div>
@@ -44,7 +44,7 @@ export default {
 @import '~assets/stylus/mixin';
   #app
     border-1px()
-    .tab-wrapper {
+    .tab-wrappers {
       position fixed
       top 136px
       left 0
