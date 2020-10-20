@@ -1,13 +1,13 @@
 <!--
  * @Date: 2020-08-23 22:42:27
- * @LastEditors: hanjiawang
- * @LastEditTime: 2020-10-17 10:54:04
+ * @LastEditors: ,: hanjiawang
+ * @LastEditTime: ,: 2020-10-20 20:44:10
 -->
 <template>
   <div id="app">
     <VHeader :seller="seller" />
     <div class="tab-wrappers ">
-      <Tab />
+      <Tab :tabs="tabs" :initalIndex="0" />
     </div>
   </div>
 </template>
@@ -16,6 +16,9 @@
 import VHeader from 'components/v-header/v-header'
 import Tab from 'components/tab/tab'
 import { getSeller } from 'api'
+import Ratings from 'components/ratings/ratings'
+import Seller from 'components/seller/seller'
+import Goods from 'components/goods/goods'
 export default {
   name: 'App',
   components: {
@@ -25,6 +28,33 @@ export default {
   data() {
     return {
       seller: {}
+    }
+  },
+  computed: {
+    tabs() {
+      return [
+        {
+          label: '商品',
+          component: Goods,
+          data: {
+            seller: this.seller
+          }
+        },
+        {
+          label: '评价',
+          component: Ratings,
+          data: {
+            seller: this.seller
+          }
+        },
+        {
+          label: '商家',
+          component: Seller,
+          data: {
+            seller: this.seller
+          }
+        }
+      ]
     }
   },
   created() {

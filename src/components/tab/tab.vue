@@ -1,21 +1,15 @@
 <!--
  * @Date: 2020-10-04 10:06:58
- * @LastEditors: hanjiawang
- * @LastEditTime: 2020-10-15 20:39:20
+ * @LastEditors: ,: hanjiawang
+ * @LastEditTime: ,: 2020-10-20 20:44:30
 -->
 <template>
   <div class="tab">
-    <cube-tab-bar v-model="selectedLabel" :data="tabs" showSlider :useTransition="false"> </cube-tab-bar>
+    <cube-tab-bar ref="tabBar" v-model="selectedLabel" :data="tabs" showSlider :useTransition="false"> </cube-tab-bar>
     <div class="slider-wrapper">
-      <cube-slide :loop="false" :show-dots="false" :auto-play="false" :initialIndex="index" ref="slide">
-        <cube-slide-item>
-          <Ratings />
-        </cube-slide-item>
-        <cube-slide-item>
-          <Seller />
-        </cube-slide-item>
-        <cube-slide-item>
-          <Goods />
+      <cube-slide @scroll="onScroll" @change="onChange" :loop="false" :show-dots="false" :auto-play="false" :initialIndex="index" ref="slide" :options="slideOptions">
+        <cube-slide-item v-for="(item, index) in tabs" :key="index">
+          <component :is="item.component" :data="item.data"></component>
         </cube-slide-item>
       </cube-slide>
     </div>
@@ -23,20 +17,28 @@
 </template>
 
 <script>
-import Ratings from 'components/ratings/ratings'
-import Seller from 'components/seller/seller'
-import Goods from 'components/goods/goods'
 export default {
   name: 'Tab',
-  components: {
-    Ratings,
-    Seller,
-    Goods
+  props: {
+    tabs: {
+      type: Array,
+      default: function() {
+        return {}
+      }
+    },
+    initalIndex: {
+      type: Number,
+      default: 0
+    }
   },
   data() {
     return {
-      tabs: [{ label: '商品' }, { label: '评价' }, { label: '商家' }],
-      index: 0
+      index: this.initalIndex,
+      slideOptions: {
+        listenScroll: true,
+        probeType: 3,
+        directionLockThrehold: 0
+      }
     }
   },
   computed: {
@@ -51,7 +53,17 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    onScroll(opt) {
+      const tabBarWidth = this.$refs.tabBar.$el.clientWidth
+      const slideWidth = this.$refs.slide.slide.scrollerWidth
+      const transform = (-opt.x / slideWidth) * tabBarWidth
+      this.$refs.tabBar.setSliderTransform(transform)
+    },
+    onChange(index) {
+      this.index = index
+    }
+  }
 }
 </script>
 
