@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-04 10:06:58
- * @LastEditors: ,: hanjiawang
- * @LastEditTime: ,: 2020-10-20 20:44:30
+ * @LastEditors: hanjiawang
+ * @LastEditTime: 2020-10-26 20:50:22
 -->
 <template>
   <div class="tab">
@@ -9,7 +9,7 @@
     <div class="slider-wrapper">
       <cube-slide @scroll="onScroll" @change="onChange" :loop="false" :show-dots="false" :auto-play="false" :initialIndex="index" ref="slide" :options="slideOptions">
         <cube-slide-item v-for="(item, index) in tabs" :key="index">
-          <component :is="item.component" :data="item.data"></component>
+          <component ref="component" :is="item.component" :data="item.data"></component>
         </cube-slide-item>
       </cube-slide>
     </div>
@@ -23,7 +23,7 @@ export default {
     tabs: {
       type: Array,
       default: function() {
-        return {}
+        return []
       }
     },
     initalIndex: {
@@ -53,6 +53,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.onChange(this.index)
+  },
   methods: {
     onScroll(opt) {
       const tabBarWidth = this.$refs.tabBar.$el.clientWidth
@@ -60,8 +63,12 @@ export default {
       const transform = (-opt.x / slideWidth) * tabBarWidth
       this.$refs.tabBar.setSliderTransform(transform)
     },
-    onChange(index) {
-      this.index = index
+    onChange(current) {
+      this.index = current
+      const instance = this.$refs.component[current]
+      if (instance && instance.fetch) {
+        instance.fetch()
+      }
     }
   }
 }
