@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-10-15 20:25:56
  * @LastEditors: hanjiawang
- * @LastEditTime: 2020-10-26 20:48:35
+ * @LastEditTime: 2021-01-04 22:05:31
 -->
 <template>
   <div class="goods">
@@ -34,13 +34,27 @@
         </cube-scroll-nav-panel>
       </cube-scroll-nav>
     </div>
+    <div class="shop-cart-wrapper">
+      <shop-cart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" />
+    </div>
   </div>
 </template>
 
 <script>
 import { getGoods } from 'api'
+import ShopCart from 'components/shop-cart/shop-cart.vue'
 export default {
-  components: {},
+  components: {
+    ShopCart
+  },
+  props: {
+    data: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
   data() {
     return {
       goods: [],
@@ -50,7 +64,11 @@ export default {
       }
     }
   },
-  computed: {},
+  computed: {
+    seller() {
+      return this.data.seller
+    }
+  },
   methods: {
     fetch() {
       getGoods().then(goods => {
